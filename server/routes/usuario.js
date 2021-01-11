@@ -32,13 +32,14 @@ app.get('/usuario', verificarToken, (req, res) => {
         });
 });
 
-app.post('/usuario', [verificarToken, verificaAdmin_Role], (req, res) => {
+app.post('/usuario', [/* verificarToken, verificaAdmin_Role */], (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         nombre: body.nombre,
         email: body.email,
         password: bcrypt.hashSync(body.password, 10),
-        role: body.role
+        // role: body.role
+        role: "ADMIN_ROLE"
     });
 
     usuario.save((err, usuarioDB) => {
